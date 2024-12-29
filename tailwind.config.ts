@@ -10,7 +10,12 @@ export default {
     extend: {
       colors: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        foreground: "var(--foreground)", 
+      },
+      fontFamily: {
+        sans: ["Montserrat", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+        serif: ["Crimson Pro", "serif"]
       },
     },
   },
