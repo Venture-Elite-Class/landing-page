@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
+      <body className="antialiased pt-10" suppressHydrationWarning>
         <Navbar />
         {children}
         <footer className="row-start-3 text-sm text-center serif">

@@ -1,4 +1,5 @@
 import HomeLayout from '@/components/home/HomeLayout';
+import SectionLayout from '@/components/ui/SectionLayout';
 import Hero from '@/components/home/Hero';
 import Description from '@/components/home/Description';
 
@@ -8,9 +9,17 @@ export default function Home() {
       <HomeLayout showWavyBackground>
         <Hero />
       </HomeLayout>
-      <HomeLayout>
+      <SectionLayout>
         <Description />
-      </HomeLayout>
+      </SectionLayout>
+      <SectionLayout
+        background={{ 
+          type: "image",
+          image: "/images/home-bg.png",
+          alt: "Home background"  
+        }}>
+        <Description />
+      </SectionLayout>
     </div>
   );
 }
