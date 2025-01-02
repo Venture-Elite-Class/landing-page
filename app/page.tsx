@@ -2,6 +2,8 @@ import HomeLayout from '@/components/home/HomeLayout';
 import SectionLayout from '@/components/ui/SectionLayout';
 import Hero from '@/components/home/Hero';
 import Description from '@/components/home/Description';
+import Features from '@/components/home/Features';
+import FAQ from '@/components/home/FAQ';
 
 export default function Home() {
   return (
@@ -15,10 +17,13 @@ export default function Home() {
       <SectionLayout
         background={{ 
           type: "image",
-          image: "/images/home-bg.png",
+          image: "/images/GridBG.png",
           alt: "Home background"  
         }}>
-        <Description />
+        <Features />
+      </SectionLayout>
+      <SectionLayout>
+        <FAQ />
       </SectionLayout>
     </div>
   );
