@@ -4,6 +4,7 @@ import Hero from '@/components/home/Hero';
 import Description from '@/components/home/Description';
 import Features from '@/components/home/Features';
 import FAQ from '@/components/home/FAQ';
+import NewsArticle from '@/components/home/NewsArticle';
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
       <HomeLayout showWavyBackground>
         <Hero />
       </HomeLayout>
+      <SectionLayout>
+        <NewsArticle />
+      </SectionLayout>
       <SectionLayout>
         <Description />
       </SectionLayout>

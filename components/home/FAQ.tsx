@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Accordion from '../ui/Accordion';
-import { fadeIn } from '@/lib/animations';
-import faqItems from '@/data/faqs/faqs';
+import { motion } from "framer-motion";
+import Accordion from "../ui/Accordion";
+import { fadeIn } from "@/lib/animations";
+import faqItems from "@/data/faqs/faqs";
 
 const FAQ = () => {
   return (
@@ -15,8 +15,8 @@ const FAQ = () => {
       </div>
 
       <div className="w-full max-w-6xl mx-auto px-4 py-32">
-        <motion.div 
-          variants={fadeIn('up', 0.3)}
+        <motion.div
+          variants={fadeIn("up", 0.3)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -29,15 +29,12 @@ const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Find answers to common questions about our program. Need more help?{' '}
-            <a href="/contact" className="text-gradient-1 hover:underline">
-              Contact our support team
-            </a>.
+            Find answers to common questions about our program.
           </p>
         </motion.div>
 
-        <motion.div 
-          variants={fadeIn('up', 0.5)}
+        <motion.div
+          variants={fadeIn("up", 0.5)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -58,9 +55,16 @@ const FAQ = () => {
             </div>
           ))}
         </motion.div>
+        <p className="text-xl text-gray-300 max-w-2xl mx-auto text-center py-8 my-16">
+          Need more help?{" "}
+          <a href="/contact" className="text-gradient-1 hover:underline">
+            Contact our support team
+          </a>
+          .
+        </p>
       </div>
     </section>
   );
 };
 
-export default FAQ; 
+export default FAQ;
