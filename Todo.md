@@ -1,7 +1,8 @@
 ## Site edits
 
-- [ ] Newspaper Articles
+- [x] Newspaper Articles
 - [ ] Blog Articles
 
 ## Content
 
+- [ ] Add more news articles
