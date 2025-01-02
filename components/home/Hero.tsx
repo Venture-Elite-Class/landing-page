@@ -17,7 +17,7 @@ export default function Hero() {
         className="flex flex-col gap-4 text-center"
       >
         <h1 className="text-6xl md:text-7xl font-bold serif text-center max-w-7xl">
-          Silicon Valley Tech Excellence Program at <span className="text-gradient-1 serif">CMU</span>
+          Silicon Valley Tech Excellence Program at <span className="text-gradient-1 serif">Carnegie Mellon University</span>
         </h1>
         <motion.p 
           variants={fadeIn('up', 0.5)}

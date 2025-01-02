@@ -3,47 +3,7 @@
 import { motion } from 'framer-motion';
 import Accordion from '../ui/Accordion';
 import { fadeIn } from '@/lib/animations';
-
-const faqItems = [
-  {
-    category: "Getting Started",
-    description: "Essential information about our program and certification process",
-    items: [
-      {
-        title: "Are two weeks sufficient for certification?",
-        content: "Yes! Our intensive program is specifically designed to prepare you for both Microsoft certifications in two weeks. With focused training, hands-on labs, and expert guidance, our success rate is consistently high. We provide additional support and resources even after the program if needed."
-      },
-      {
-        title: "What's included in the program fee?",
-        content: "The $2,500 all-inclusive fee covers: certification exam vouchers, training materials, access to CMU facilities, accommodation arrangements, networking events, tech company visits, and post-program career support. Travel and visa expenses are not included."
-      }
-    ]
-  },
-  {
-    category: "Program Support",
-    description: "Information about accommodation and visa assistance",
-    items: [
-      {
-        title: "How is the visa process handled?",
-        content: "We provide comprehensive visa application support, including official invitation letters, program documentation, and guidance throughout the process. Our team has extensive experience helping international students secure their visas for short-term programs."
-      },
-      {
-        title: "What are the accommodation arrangements?",
-        content: "Students are accommodated in fully furnished apartments near the CMU Silicon Valley campus. All units include Wi-Fi, basic amenities, and are within walking distance or short commute to campus. Room sharing is arranged with fellow program participants."
-      }
-    ]
-  },
-  {
-    category: "Financial Information",
-    description: "Details about scholarships and payment options",
-    items: [
-      {
-        title: "Can I get a scholarship or financial aid?",
-        content: "Yes! We offer performance-based scholarships that can cover up to 100% of the program fee. Additionally, our Elite 50 Referral Program provides opportunities for substantial rewards and additional benefits. Contact our team for detailed eligibility criteria."
-      }
-    ]
-  }
-];
+import faqItems from '@/data/faqs/faqs';
 
 const FAQ = () => {
   return (

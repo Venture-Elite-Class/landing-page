@@ -10,7 +10,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-white text-black hover:shadow-[0_0_25px_rgba(255,255,255,0.7)] transition-shadow duration-300',
         destructive: 'bg-red-500 text-white hover:shadow-[0_0_25px_rgba(239,68,68,0.7)] transition-shadow duration-300',
-        outline: 'border-2 border-gray-300 bg-transparent hover:bg-gray-50 hover:border-gray-400 hover:shadow-[0_0_25px_rgba(209,213,219,0.7)] hover:text-black transition-shadow duration-300',
+        outline: 'border-2 border-gray-300 bg-transparent hover:bg-gray-50 hover:border-white hover:shadow-[0_0_25px_rgba(255,255,255,0.7)] hover:text-black transition-shadow duration-300',
         secondary: 'bg-gray-500 text-white hover:shadow-[0_0_25px_rgba(107,114,128,0.7)] transition-shadow duration-300',
         ghost: 'bg-transparent hover:shadow-[0_0_25px_rgba(243,244,246,0.7)] transition-shadow duration-300',
         link: 'text-primary underline-offset-4 hover:underline shadow-none hover:shadow-none',
