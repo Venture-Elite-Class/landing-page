@@ -4,7 +4,6 @@ import {
   Linkedin, 
   FileText, 
   GraduationCap, 
-  School, 
   Users, 
   Network,
   ClipboardCheck,
@@ -98,7 +97,7 @@ const certificationDescriptions: Record<CertType, string> = {
 };
 
 function getIcon(iconName: string, className: string = "w-5 h-5") {
-  const icons: { [key: string]: React.ComponentType<any> } = {
+  const icons: { [key: string]: React.ComponentType<{ className?: string }> } = {
     Linkedin,
     FileText,
     ClipboardCheck,

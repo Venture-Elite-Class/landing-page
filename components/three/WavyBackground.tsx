@@ -9,13 +9,16 @@ export default function WavyBackground() {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    // Capture the container reference at the start
+    const container = containerRef.current;
+
     // Setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, containerRef.current.clientWidth / containerRef.current.clientHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     
-    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    containerRef.current.appendChild(renderer.domElement);
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
 
     // Create mesh geometry
     const geometry = new THREE.PlaneGeometry(100, 100, 30, 30);
@@ -53,10 +56,9 @@ export default function WavyBackground() {
 
     // Handle resize
     const handleResize = () => {
-      if (!containerRef.current) return;
-      camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+      camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+      renderer.setSize(container.clientWidth, container.clientHeight);
     };
 
     window.addEventListener('resize', handleResize);
@@ -64,16 +66,14 @@ export default function WavyBackground() {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      container.removeChild(renderer.domElement);
       geometry.dispose();
       material.dispose();
+      renderer.dispose();
     };
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className="absolute top-0 left-0 w-full h-full -z-10"
-    />
+    <div ref={containerRef} className="absolute top-0 left-0 w-full h-full -z-10" />
   );
 } 

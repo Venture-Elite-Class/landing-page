@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronDown, FiPlus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 
 interface AccordionItemProps {
   title: string;
