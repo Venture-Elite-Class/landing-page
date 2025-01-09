@@ -88,12 +88,21 @@ const expertFeatures: Feature[] = [
 ];
 
 const certificationDescriptions: Record<CertType, string> = {
-  Cloud: "Microsoft Azure Fundamentals (AZ-900)",
-  AI: "Microsoft Azure AI Fundamentals (AI-900)",
-  SC: "Microsoft Security Fundamentals (SC-900)",
-  DP: "Microsoft Azure Data Fundamentals (DP-900)",
-  PL: "Microsoft Power Platform Fundamentals (PL-900)",
-  MS: "Microsoft 365 Fundamentals (MS-900)"
+  Cloud: "Microsoft Azure Fundamentals ",
+  AI: "Microsoft Azure AI Fundamentals ",
+  SC: "Microsoft Security Fundamentals ",
+  DP: "Microsoft Azure Data Fundamentals ",
+  PL: "Microsoft Power Platform Fundamentals ",
+  MS: "Microsoft 365 Fundamentals "
+};
+
+const certificationCodes: Record<CertType, string> = {
+  Cloud: "(AZ-900)",
+  AI: "(AI-900)",
+  SC: "(SC-900)",
+  DP: "(DP-900)",
+  PL: "(PL-900)",
+  MS: "(MS-900)"
 };
 
 function getIcon(iconName: string, className: string = "w-5 h-5") {
@@ -118,12 +127,13 @@ export default function CoursesPage() {
     <main className="min-h-screen py-12 px-6 md:px-12">
       {/* Premium Package */}
       <section className="mb-16">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all">
+        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80 -z-10"></div>
           <div className="space-y-4">
             <Badge className="bg-white text-blue-600">Premium Package</Badge>
             <h2 className="text-3xl font-bold">Azure Cloud + AI Fundamentals</h2>
             <p className="text-lg opacity-90">
-              Master Microsoft Azure and AI with certifications in {certificationDescriptions.Cloud} and {certificationDescriptions.AI}
+              Master Microsoft Azure and AI with certifications in {certificationDescriptions.Cloud}<span className="whitespace-nowrap">{certificationCodes.Cloud}</span> and {certificationDescriptions.AI}<span className="whitespace-nowrap">{certificationCodes.AI}</span>
             </p>
             <div className="mt-6">
               <h3 className="text-xl font-semibold mb-3">Features:</h3>
@@ -145,7 +155,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
@@ -171,7 +181,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
@@ -197,7 +207,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
@@ -208,7 +218,7 @@ export default function CoursesPage() {
                 </ul>
               </div>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 pt-6 border-t border-white/40">
               <span className="text-3xl font-bold">$2,499 USD</span>
             </div>
           </div>
@@ -225,33 +235,35 @@ export default function CoursesPage() {
             { title: "Azure + AI + Power Platform", certs: ["Cloud", "AI", "PL"] },
             { title: "Azure + AI + Microsoft 365", certs: ["Cloud", "AI", "MS"] }
           ] as CoursePackage[]).map((package_, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border border-gray-200 flex flex-col">
-              <div className="flex-grow">
+            <div key={index} className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all relative overflow-hidden flex flex-col h-full">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/50 -z-10"></div>
+              <div className="flex-grow relative z-10">
                 <Badge className="bg-blue-100 text-blue-600">Advanced Package</Badge>
                 <h3 className="text-xl font-bold mt-4">{package_.title}</h3>
                 <div className="mt-4 space-y-2">
                   {package_.certs.map((cert) => (
-                    <p key={cert} className="text-sm text-gray-600">
-                      • {certificationDescriptions[cert]}
+                    <p key={cert} className="text-sm text-gray-800 flex">
+                      <span className="mr-2 flex-shrink-0">•</span>
+                      <span>{certificationDescriptions[cert]}<span className="whitespace-nowrap">{certificationCodes[cert]}</span></span>
                     </p>
                   ))}
                 </div>
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <span className="text-2xl font-bold">$3,499 USD</span>
+              <div className="mt-6 pt-6 border-t border-gray-200/30">
+                <span className="text-2xl font-bold text-gray-800 block">$3,499 USD</span>
               </div>
             </div>
           ))}
         </div>
         <div className="flex flex-wrap gap-3 justify-center">
           {commonFeatures.map((feature, index) => (
-            <div key={index} className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center group">
+            <div key={index} className="backdrop-blur-md bg-blue-50/90 border border-blue-200/50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center group">
               {getIcon(feature.icon, "w-4 h-4")}
               <span className="mx-2">{feature.title}</span>
               <TooltipProvider>
                 <Tooltip delayDuration={200}>
                   <TooltipTrigger asChild>
-                    <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center hover:bg-blue-200 transition-colors cursor-help">
+                    <div className="w-5 h-5 rounded-full bg-blue-100/80 backdrop-blur-sm flex items-center justify-center hover:bg-blue-200/80 transition-colors cursor-help">
                       <Info className="w-3.5 h-3.5" />
                     </div>
                   </TooltipTrigger>
@@ -259,7 +271,7 @@ export default function CoursesPage() {
                     side="bottom" 
                     align="center"
                     sideOffset={5}
-                    className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                    className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                   >
                     <p className="text-sm leading-relaxed">{feature.description}</p>
                   </TooltipContent>
@@ -278,14 +290,16 @@ export default function CoursesPage() {
             { title: "Azure + AI + Data + Power Platform", certs: ["Cloud", "AI", "DP", "PL"] },
             { title: "Azure + AI + Microsoft 365 + Security", certs: ["Cloud", "AI", "MS", "SC"] }
           ] as CoursePackage[]).map((package_, index) => (
-            <div key={index} className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl shadow-xl p-8 text-white flex flex-col">
-              <div className="flex-grow">
+            <div key={index} className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl shadow-xl p-8 text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 to-blue-600/90 -z-10"></div>
+              <div className="flex-grow relative z-10">
                 <Badge className="bg-white text-purple-600">Expert Package</Badge>
                 <h3 className="text-2xl font-bold mt-4">{package_.title}</h3>
                 <div className="mt-4 space-y-2">
                   {package_.certs.map((cert) => (
-                    <p key={cert} className="text-sm opacity-90">
-                      • {certificationDescriptions[cert]}
+                    <p key={cert} className="text-sm opacity-90 flex">
+                      <span className="mr-2 flex-shrink-0">•</span>
+                      <span>{certificationDescriptions[cert]}<span className="whitespace-nowrap">{certificationCodes[cert]}</span></span>
                     </p>
                   ))}
                 </div>
@@ -293,7 +307,7 @@ export default function CoursesPage() {
 
               <div className="mt-6 pt-6 border-t border-white/20">
                 <h4 className="font-semibold mb-2">All Features Included:</h4>
-                <ul className="grid grid-cols-2 gap-y-6 gap-x-4">
+                <ul className="grid grid-cols-2 gap-y-6 gap-x-4 backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
                   {commonFeatures.slice(0, 3).map((feature, index) => (
                     <li key={index} className="flex items-start min-h-[3rem]">
                       {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
@@ -309,7 +323,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
@@ -332,7 +346,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
@@ -345,7 +359,7 @@ export default function CoursesPage() {
 
               <div className="mt-6 pt-6 border-t border-white/20">
                 <h4 className="font-semibold mb-2">Expert Exclusive Benefits:</h4>
-                <ul className="grid grid-cols-2 gap-y-6 gap-x-4">
+                <ul className="grid grid-cols-2 gap-y-6 gap-x-4 backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
                   {expertFeatures.map((feature, index) => (
                     <li key={index} className="flex items-start min-h-[3rem]">
                       {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
@@ -361,7 +375,7 @@ export default function CoursesPage() {
                             side="bottom" 
                             align="center"
                             sideOffset={5}
-                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
                           </TooltipContent>
