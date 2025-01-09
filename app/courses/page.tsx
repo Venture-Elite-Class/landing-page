@@ -235,8 +235,8 @@ export default function CoursesPage() {
             { title: "Azure + AI + Power Platform", certs: ["Cloud", "AI", "PL"] },
             { title: "Azure + AI + Microsoft 365", certs: ["Cloud", "AI", "MS"] }
           ] as CoursePackage[]).map((package_, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all relative overflow-hidden flex flex-col h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/50 -z-10"></div>
+            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all relative overflow-hidden flex flex-col h-full">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 -z-10"></div>
               <div className="flex-grow relative z-10">
                 <Badge className="bg-blue-100 text-blue-600">Advanced Package</Badge>
                 <h3 className="text-xl font-bold mt-4">{package_.title}</h3>
