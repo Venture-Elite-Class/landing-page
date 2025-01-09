@@ -1,4 +1,23 @@
-import { Badge } from "../components/ui/badge";
+import { Badge } from "@/app/components/ui/badge";
+import { 
+  Info, 
+  Linkedin, 
+  FileText, 
+  GraduationCap, 
+  School, 
+  Users, 
+  Network,
+  ClipboardCheck,
+  Users2,
+  Target,
+  Building2
+} from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/app/components/ui/tooltip";
 
 type CertType = 'Cloud' | 'AI' | 'SC' | 'DP' | 'PL' | 'MS';
 
@@ -7,20 +26,66 @@ interface CoursePackage {
   certs: CertType[];
 }
 
-const commonFeatures = [
-  "LinkedIn profile optimization workshop",
-  "Resume Review Workshop",
-  "Session by CMU admissions committee on college application package optimization",
-  "Sessions by Program Directors about their programs",
-  "Opportunity to meet CMU professors and students",
-  "Silicon Valley Networking Events opportunity"
+interface Feature {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const commonFeatures: Feature[] = [
+  {
+    title: "LinkedIn Profile",
+    description: "Learn professional LinkedIn strategies and best practices to create an impactful profile that attracts recruiters and opportunities",
+    icon: "Linkedin"
+  },
+  {
+    title: "Resume Review",
+    description: "Comprehensive resume review and optimization to align with industry standards",
+    icon: "FileText"
+  },
+  {
+    title: "CMU Admissions Guide",
+    description: "Direct guidance from CMU admissions committee members on application strategy",
+    icon: "ClipboardCheck"
+  },
+  {
+    title: "CMU Degree Program Insights",
+    description: "In-depth exploration of CMU's degree programs with detailed insights from Program Directors",
+    icon: "GraduationCap"
+  },
+  {
+    title: "Silicon Valley Networking Events",
+    description: "Exclusive access to Silicon Valley tech meetups, conferences, and industry networking events",
+    icon: "Network"
+  },
+  {
+    title: "CMU Student and Faculty Connections",
+    description: "Direct networking opportunities with current CMU students and distinguished faculty members",
+    icon: "Users"
+  }
 ];
 
-const expertFeatures = [
-  "Letter of recommendations",
-  "Three 30-minute 1:1 mentorship sessions with a Microsoft Employee of choice",
-  "A referral for a position at Microsoft",
-  "3 mock interview practice sessions"
+const expertFeatures: Feature[] = [
+  {
+    title: "Pro References",
+    description: "Personalized letters of recommendation from industry experts",
+    icon: "FileText"
+  },
+  {
+    title: "Microsoft Mentorship",
+    description: "Three 30-minute 1:1 mentorship sessions with a Microsoft Employee of choice",
+    icon: "Users2"
+  },
+  {
+    title: "Direct Referral",
+    description: "Guaranteed referral for a position at Microsoft",
+    icon: "Target"
+  },
+  {
+    title: "Interview Prep",
+    description: "3 comprehensive mock interview practice sessions with feedback",
+    icon: "Building2"
+  }
 ];
 
 const certificationDescriptions: Record<CertType, string> = {
@@ -31,6 +96,23 @@ const certificationDescriptions: Record<CertType, string> = {
   PL: "Microsoft Power Platform Fundamentals (PL-900)",
   MS: "Microsoft 365 Fundamentals (MS-900)"
 };
+
+function getIcon(iconName: string, className: string = "w-5 h-5") {
+  const icons: { [key: string]: React.ComponentType<any> } = {
+    Linkedin,
+    FileText,
+    ClipboardCheck,
+    GraduationCap,
+    Network,
+    Users,
+    Users2,
+    Target,
+    Building2
+  };
+  
+  const IconComponent = icons[iconName];
+  return IconComponent ? <IconComponent className={className} /> : null;
+}
 
 export default function CoursesPage() {
   return (
@@ -46,11 +128,27 @@ export default function CoursesPage() {
             </p>
             <div className="mt-6">
               <h3 className="text-xl font-semibold mb-3">Features:</h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {commonFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-center">
-                    <span className="mr-2">✓</span>
-                    {feature}
+                  <li key={index} className="flex items-center space-x-2">
+                    {getIcon(feature.icon, "w-5 h-5")}
+                    <span>{feature.title}</span>
+                    <TooltipProvider>
+                      <Tooltip delayDuration={200}>
+                        <TooltipTrigger asChild>
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                            <Info className="w-3.5 h-3.5" />
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent 
+                          side="right" 
+                          align="start"
+                          className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                        >
+                          <p className="text-sm leading-relaxed">{feature.description}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </li>
                 ))}
               </ul>
@@ -92,8 +190,25 @@ export default function CoursesPage() {
         </div>
         <div className="flex flex-wrap gap-3 justify-center">
           {commonFeatures.map((feature, index) => (
-            <div key={index} className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
-              {feature}
+            <div key={index} className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 group">
+              {getIcon(feature.icon, "w-4 h-4")}
+              <span>{feature.title}</span>
+              <TooltipProvider>
+                <Tooltip delayDuration={200}>
+                  <TooltipTrigger asChild>
+                    <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center hover:bg-blue-200 transition-colors cursor-help">
+                      <Info className="w-3.5 h-3.5" />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="top" 
+                    align="center"
+                    className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                  >
+                    <p className="text-sm leading-relaxed">{feature.description}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           ))}
         </div>
@@ -122,11 +237,49 @@ export default function CoursesPage() {
 
               <div className="mt-6 pt-6 border-t border-white/20">
                 <h4 className="font-semibold mb-2">All Features Included:</h4>
-                <ul className="grid grid-cols-2 gap-2">
-                  {commonFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-sm">
-                      <span className="mr-2">✓</span>
-                      {feature}
+                <ul className="grid grid-cols-2 gap-y-6 gap-x-4">
+                  {commonFeatures.slice(0, 3).map((feature, index) => (
+                    <li key={index} className="flex items-start space-x-2 text-sm min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1">{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="right" 
+                            align="start"
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </li>
+                  ))}
+                  {commonFeatures.slice(3).map((feature, index) => (
+                    <li key={index + 3} className="flex items-start space-x-2 text-sm min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1">{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="right" 
+                            align="start"
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </li>
                   ))}
                 </ul>
@@ -136,9 +289,25 @@ export default function CoursesPage() {
                 <h4 className="font-semibold mb-2">Expert Exclusive Benefits:</h4>
                 <ul className="grid grid-cols-2 gap-2">
                   {expertFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center text-sm">
-                      <span className="mr-2">★</span>
-                      {feature}
+                    <li key={index} className="flex items-center space-x-2 text-sm">
+                      {getIcon(feature.icon, "w-4 h-4")}
+                      <span>{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="right" 
+                            align="start"
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </li>
                   ))}
                 </ul>
