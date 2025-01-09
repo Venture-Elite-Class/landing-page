@@ -1,3 +1,5 @@
+'use client';
+
 import { Badge } from "@/app/components/ui/badge";
 import { 
   Info, 
@@ -9,7 +11,8 @@ import {
   ClipboardCheck,
   Users2,
   Target,
-  Building2
+  Building2,
+  CheckCircle2
 } from 'lucide-react';
 import {
   Tooltip,
@@ -17,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/app/components/ui/tooltip";
+import { motion } from "framer-motion";
 
 type CertType = 'Cloud' | 'AI' | 'SC' | 'DP' | 'PL' | 'MS';
 
@@ -105,6 +109,20 @@ const certificationCodes: Record<CertType, string> = {
   MS: "(MS-900)"
 };
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const staggerChildren = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
 function getIcon(iconName: string, className: string = "w-5 h-5") {
   const icons: { [key: string]: React.ComponentType<{ className?: string }> } = {
     Linkedin,
@@ -115,7 +133,8 @@ function getIcon(iconName: string, className: string = "w-5 h-5") {
     Users,
     Users2,
     Target,
-    Building2
+    Building2,
+    CheckCircle2
   };
   
   const IconComponent = icons[iconName];
@@ -124,288 +143,296 @@ function getIcon(iconName: string, className: string = "w-5 h-5") {
 
 export default function CoursesPage() {
   return (
-    <main className="min-h-screen py-12 px-6 md:px-12">
-      {/* Premium Package */}
-      <section className="mb-16">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80 -z-10"></div>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Badge className="bg-white text-blue-600">Premium Package</Badge>
-              <span className="px-3 py-1 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">2 Week Program</span>
-            </div>
-            <h2 className="text-3xl font-bold">Azure Cloud + AI Fundamentals</h2>
-            <p className="text-lg opacity-90">
-              Master Microsoft Azure and AI with certifications in {certificationDescriptions.Cloud}<span className="whitespace-nowrap">{certificationCodes.Cloud}</span> and {certificationDescriptions.AI}<span className="whitespace-nowrap">{certificationCodes.AI}</span>
-            </p>
-            <div className="mt-6">
-              <h3 className="text-xl font-semibold mb-3">Features:</h3>
-              <div className="grid grid-cols-3 gap-6">
-                {/* Column 1: LinkedIn and Resume */}
-                <ul className="space-y-3">
-                  {commonFeatures.slice(0, 2).map((feature, index) => (
-                    <li key={index} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
+    <main className="min-h-screen py-12 px-6 md:px-12 bg-black">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          className="flex flex-col items-center justify-center mb-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-5xl font-serif text-white mb-4">
+            Professional Certification Programs
+          </h1>
+          <p className="text-xl text-gray-400 max-w-2xl font-light">
+            Advance your career with industry-recognized Microsoft certifications. 
+            Join our distinguished alumni network of technology leaders.
+          </p>
+        </motion.div>
+
+        {/* Premium Package */}
+        <motion.section 
+          className="mb-24"
+          variants={fadeInUp}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="relative">
+            <div className="backdrop-blur-sm bg-gray-900 border border-gray-800 rounded-xl p-8 text-white shadow-xl">
+              <div className="space-y-8">
+                <div className="flex items-center space-x-3 flex-wrap gap-y-2">
+                  <Badge className="bg-blue-100 text-blue-900 px-4 py-1 font-medium">Premium Package</Badge>
+                  <span className="px-4 py-1 rounded-full bg-gray-800 text-gray-300 text-sm font-medium">2 Week Program</span>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-serif text-white mb-3">Azure Cloud + AI Fundamentals</h2>
+                  <p className="text-lg text-gray-400">
+                    Master Microsoft Azure and AI with our most comprehensive certification package
+                  </p>
+                </div>
+
+                {/* Features Grid */}
+                <motion.div 
+                  className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8"
+                  variants={staggerChildren}
+                >
+                  {[...Array(3)].map((_, colIndex) => (
+                    <motion.ul 
+                      key={colIndex} 
+                      className="space-y-6"
+                      variants={fadeInUp}
+                    >
+                      {commonFeatures.slice(colIndex * 2, colIndex * 2 + 2).map((feature, index) => (
+                        <motion.li 
+                          key={index}
+                          className="flex items-start space-x-4 p-4 rounded-lg bg-gray-800/50 border border-gray-700"
+                        >
+                          <div className="flex-shrink-0 p-2 rounded-lg bg-gray-700">
+                            {getIcon(feature.icon, "w-5 h-5 text-blue-200")}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <h3 className="font-medium text-white">
+                                {feature.title}
+                              </h3>
+                              <TooltipProvider>
+                                <Tooltip>
+                                  <TooltipTrigger>
+                                    <Info className="w-4 h-4 text-gray-400" />
+                                  </TooltipTrigger>
+                                  <TooltipContent 
+                                    side="bottom"
+                                    className="max-w-xs bg-white border border-gray-200 text-gray-900 p-4 rounded-lg shadow-xl"
+                                  >
+                                    <p className="text-sm">{feature.description}</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              </TooltipProvider>
                             </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
+                          </div>
+                        </motion.li>
+                      ))}
+                    </motion.ul>
                   ))}
-                </ul>
-                {/* Column 2: CMU Degree and Admissions */}
-                <ul className="space-y-3">
-                  {commonFeatures.slice(2, 4).map((feature, index) => (
-                    <li key={index} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  ))}
-                </ul>
-                {/* Column 3: Silicon Valley and Faculty */}
-                <ul className="space-y-3">
-                  {commonFeatures.slice(4, 6).map((feature, index) => (
-                    <li key={index} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  ))}
-                </ul>
+                </motion.div>
+
+                <div className="mt-12 pt-8 border-t border-gray-800 flex items-center justify-between">
+                  <div>
+                    <span className="text-3xl font-serif text-white">$2,499 USD</span>
+                    <p className="text-gray-400 mt-2">One-time payment • Lifetime access</p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+                  >
+                    Enroll Now
+                  </motion.button>
+                </div>
               </div>
-            </div>
-            <div className="mt-6 pt-6 border-t border-white/40">
-              <span className="text-3xl font-bold">$2,499 USD</span>
             </div>
           </div>
-        </div>
-      </section>
+        </motion.section>
 
-      {/* Expert Packages */}
-      <section className="mb-16">
-        <div className="inline-block backdrop-blur-md bg-gradient-to-r from-yellow-200/30 via-amber-100/30 to-yellow-200/30 border border-white/20 rounded-lg px-6 py-3 shadow-xl mb-8">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-yellow-500 inline-block text-transparent bg-clip-text">Expert Microsoft Certification Packages</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {([
-            { title: "Azure + AI + Data + Power Platform", certs: ["Cloud", "AI", "DP", "PL"] },
-            { title: "Azure + AI + Microsoft 365 + Security", certs: ["Cloud", "AI", "MS", "SC"] }
-          ] as CoursePackage[]).map((package_, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl shadow-xl p-8 text-white relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 to-blue-600/90 -z-10"></div>
-              <div className="flex-grow relative z-10">
-                <div className="flex items-center space-x-2">
-                  <Badge className="bg-white text-purple-600">Expert Package</Badge>
-                  <span className="px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-sm">4 Week Program</span>
-                </div>
-                <h3 className="text-2xl font-bold mt-4">{package_.title}</h3>
-                <div className="mt-4 space-y-2">
-                  {package_.certs.map((cert) => (
-                    <p key={cert} className="text-sm opacity-90 flex">
-                      <span className="mr-2 flex-shrink-0">•</span>
-                      <span>{certificationDescriptions[cert]}<span className="whitespace-nowrap">{certificationCodes[cert]}</span></span>
-                    </p>
-                  ))}
-                </div>
-              </div>
+        {/* Expert Packages */}
+        <motion.section 
+          className="mb-24"
+          variants={fadeInUp}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-serif text-white mb-4">
+              Expert Microsoft Certification Packages
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Advanced certifications with exclusive Microsoft benefits
+            </p>
+          </div>
 
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <h4 className="font-semibold mb-2">All Features Included:</h4>
-                <ul className="grid grid-cols-2 gap-y-6 gap-x-4 backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
-                  {commonFeatures.slice(0, 3).map((feature, index) => (
-                    <li key={index} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  ))}
-                  {commonFeatures.slice(3).map((feature, index) => (
-                    <li key={index + 3} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <h4 className="font-semibold mb-2">Expert Exclusive Benefits:</h4>
-                <ul className="grid grid-cols-2 gap-y-6 gap-x-4 backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
-                  {expertFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-start min-h-[3rem]">
-                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
-                      <TooltipProvider>
-                        <Tooltip delayDuration={200}>
-                          <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                              <Info className="w-3.5 h-3.5" />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent 
-                            side="bottom" 
-                            align="center"
-                            sideOffset={5}
-                            className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                          >
-                            <p className="text-sm leading-relaxed">{feature.description}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <span className="text-3xl font-bold">$4,499 USD</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Advanced Packages */}
-      <section>
-        <div className="inline-block backdrop-blur-md bg-gradient-to-r from-gray-200/30 via-gray-100/30 to-gray-200/30 border border-white/20 rounded-lg px-6 py-3 shadow-xl mb-8">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-400 inline-block text-transparent bg-clip-text">Advanced Microsoft Certification Packages</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {([
-            { title: "Azure + AI + Security", certs: ["Cloud", "AI", "SC"] },
-            { title: "Azure + AI + Data", certs: ["Cloud", "AI", "DP"] },
-            { title: "Azure + AI + Power Platform", certs: ["Cloud", "AI", "PL"] },
-            { title: "Azure + AI + Microsoft 365", certs: ["Cloud", "AI", "MS"] }
-          ] as CoursePackage[]).map((package_, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all relative overflow-hidden flex flex-col h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 -z-10"></div>
-              <div className="flex-grow relative z-10">
-                <div className="flex flex-wrap items-start gap-2">
-                  <Badge className="bg-blue-100 text-blue-600 whitespace-nowrap">Advanced Package</Badge>
-                  <span className="px-3 py-1 rounded-full bg-blue-100/80 text-blue-600 text-sm font-medium backdrop-blur-sm whitespace-nowrap">3 Week Program</span>
-                </div>
-                <h3 className="text-xl font-bold mt-4">{package_.title}</h3>
-                <div className="mt-4 space-y-2">
-                  {package_.certs.map((cert) => (
-                    <p key={cert} className="text-sm text-gray-800 flex">
-                      <span className="mr-2 flex-shrink-0">•</span>
-                      <span>{certificationDescriptions[cert]}<span className="whitespace-nowrap">{certificationCodes[cert]}</span></span>
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-6 pt-6 border-t border-gray-200/30">
-                <span className="text-2xl font-bold text-gray-800 block">$3,499 USD</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-3 justify-center">
-          {commonFeatures.map((feature, index) => (
-            <div key={index} className="backdrop-blur-md bg-blue-50/90 border border-blue-200/50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center group">
-              {getIcon(feature.icon, "w-4 h-4")}
-              <span className="mx-2">{feature.title}</span>
-              <TooltipProvider>
-                <Tooltip delayDuration={200}>
-                  <TooltipTrigger asChild>
-                    <div className="w-5 h-5 rounded-full bg-blue-100/80 backdrop-blur-sm flex items-center justify-center hover:bg-blue-200/80 transition-colors cursor-help">
-                      <Info className="w-3.5 h-3.5" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {([
+              { title: "Azure + AI + Data + Power Platform", certs: ["Cloud", "AI", "DP", "PL"] },
+              { title: "Azure + AI + Microsoft 365 + Security", certs: ["Cloud", "AI", "MS", "SC"] }
+            ] as CoursePackage[]).map((package_, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="backdrop-blur-sm bg-gray-900 border border-gray-800 rounded-xl p-8 text-white shadow-xl">
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-3 flex-wrap gap-y-2">
+                      <Badge className="bg-gray-100 text-gray-900 px-4 py-1 font-medium">
+                        Expert Package
+                      </Badge>
+                      <span className="px-4 py-1 rounded-full bg-gray-800 text-gray-300 text-sm font-medium">4 Week Program</span>
                     </div>
-                  </TooltipTrigger>
-                  <TooltipContent 
-                    side="bottom" 
-                    align="center"
-                    sideOffset={5}
-                    className="backdrop-blur-md bg-white/80 text-gray-900 border border-white/20 shadow-lg p-3 max-w-[280px] rounded-lg"
-                  >
-                    <p className="text-sm leading-relaxed">{feature.description}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          ))}
-        </div>
-      </section>
+
+                    <h3 className="text-2xl font-serif text-white">
+                      {package_.title}
+                    </h3>
+
+                    <ul className="space-y-3">
+                      {package_.certs.map((cert) => (
+                        <li key={cert} className="flex items-center space-x-3 text-gray-300">
+                          <CheckCircle2 className="w-5 h-5 text-blue-400" />
+                          <span>{certificationDescriptions[cert]}<span className="text-blue-400">{certificationCodes[cert]}</span></span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Expert Features */}
+                    <div className="mt-8 space-y-6">
+                      <h4 className="font-serif text-lg text-white">Expert Exclusive Benefits:</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {expertFeatures.map((feature, index) => (
+                          <div 
+                            key={index}
+                            className="p-4 rounded-lg bg-gray-800/50 border border-gray-700"
+                          >
+                            <div className="flex items-start space-x-3">
+                              <div className="flex-shrink-0 p-2 rounded-lg bg-gray-700">
+                                {getIcon(feature.icon, "w-5 h-5 text-blue-200")}
+                              </div>
+                              <div>
+                                <h5 className="font-medium text-white">{feature.title}</h5>
+                                <p className="text-sm text-gray-400 mt-1">{feature.description}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-gray-800 flex items-center justify-between">
+                      <div>
+                        <span className="text-3xl font-serif text-white">
+                          $4,499 USD
+                        </span>
+                        <p className="text-gray-400 mt-2">One-time payment • Lifetime access</p>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="px-8 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+                      >
+                        Enroll Now
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Advanced Packages */}
+        <motion.section
+          variants={fadeInUp}
+          initial="initial"
+          animate="animate"
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-serif text-white mb-4">
+              Advanced Certification Packages
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Specialized combinations for focused career paths
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {([
+              { title: "Azure + AI + Security", certs: ["Cloud", "AI", "SC"] },
+              { title: "Azure + AI + Data", certs: ["Cloud", "AI", "DP"] },
+              { title: "Azure + AI + Power Platform", certs: ["Cloud", "AI", "PL"] },
+              { title: "Azure + AI + Microsoft 365", certs: ["Cloud", "AI", "MS"] }
+            ] as CoursePackage[]).map((package_, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="backdrop-blur-sm bg-gray-900 border border-gray-800 rounded-xl p-6 text-white shadow-lg h-full flex flex-col">
+                  <div className="flex-grow space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge className="bg-gray-100 text-gray-900 font-medium">
+                        Advanced Package
+                      </Badge>
+                      <span className="px-3 py-1 rounded-full bg-gray-800 text-gray-300 text-sm font-medium">3 Week Program</span>
+                    </div>
+                    
+                    <h3 className="text-xl font-serif text-white">{package_.title}</h3>
+                    
+                    <ul className="space-y-2">
+                      {package_.certs.map((cert) => (
+                        <li key={cert} className="flex items-center space-x-2 text-gray-300 text-sm">
+                          <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                          <span>{certificationDescriptions[cert]}<span className="text-blue-400">{certificationCodes[cert]}</span></span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 pt-6 border-t border-gray-800">
+                    <span className="text-2xl font-serif text-white block mb-4">$3,499 USD</span>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-white font-medium transition-colors border border-gray-700"
+                    >
+                      Learn More
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Common Features */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            {commonFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="bg-gray-900 border border-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center space-x-2">
+                  {getIcon(feature.icon, "w-4 h-4 text-blue-200")}
+                  <span>{feature.title}</span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Info className="w-4 h-4 text-gray-400" />
+                      </TooltipTrigger>
+                      <TooltipContent 
+                        side="bottom"
+                        className="max-w-xs bg-white border border-gray-200 text-gray-900 p-4 rounded-lg shadow-xl"
+                      >
+                        <p className="text-sm">{feature.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      </div>
     </main>
   );
 }
