@@ -12,12 +12,6 @@ export default function Home() {
       <HomeLayout showWavyBackground>
         <Hero />
       </HomeLayout>
-      <SectionLayout>
-        <NewsArticle />
-      </SectionLayout>
-      <SectionLayout>
-        <Description />
-      </SectionLayout>
       <SectionLayout
         background={{ 
           type: "image",
@@ -25,6 +19,12 @@ export default function Home() {
           alt: "Home background"  
         }}>
         <Features />
+      </SectionLayout>
+      <SectionLayout>
+        <NewsArticle />
+      </SectionLayout>
+      <SectionLayout>
+        <Description />
       </SectionLayout>
       <SectionLayout>
         <FAQ />
