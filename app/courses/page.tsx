@@ -130,7 +130,10 @@ export default function CoursesPage() {
         <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80 -z-10"></div>
           <div className="space-y-4">
-            <Badge className="bg-white text-blue-600">Premium Package</Badge>
+            <div className="flex items-center space-x-2">
+              <Badge className="bg-white text-blue-600">Premium Package</Badge>
+              <span className="px-3 py-1 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">2 Week Program</span>
+            </div>
             <h2 className="text-3xl font-bold">Azure Cloud + AI Fundamentals</h2>
             <p className="text-lg opacity-90">
               Master Microsoft Azure and AI with certifications in {certificationDescriptions.Cloud}<span className="whitespace-nowrap">{certificationCodes.Cloud}</span> and {certificationDescriptions.AI}<span className="whitespace-nowrap">{certificationCodes.AI}</span>
@@ -227,7 +230,9 @@ export default function CoursesPage() {
 
       {/* Advanced Packages */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8">Advanced Microsoft Certification Packages</h2>
+        <div className="inline-block backdrop-blur-md bg-gradient-to-r from-gray-200/30 via-gray-100/30 to-gray-200/30 border border-white/20 rounded-lg px-6 py-3 shadow-xl mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-400 inline-block text-transparent bg-clip-text">Advanced Microsoft Certification Packages</h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {([
             { title: "Azure + AI + Security", certs: ["Cloud", "AI", "SC"] },
@@ -238,7 +243,10 @@ export default function CoursesPage() {
             <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all relative overflow-hidden flex flex-col h-full">
               <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-white/10 -z-10"></div>
               <div className="flex-grow relative z-10">
-                <Badge className="bg-blue-100 text-blue-600">Advanced Package</Badge>
+                <div className="flex flex-wrap items-start gap-2">
+                  <Badge className="bg-blue-100 text-blue-600 whitespace-nowrap">Advanced Package</Badge>
+                  <span className="px-3 py-1 rounded-full bg-blue-100/80 text-blue-600 text-sm font-medium backdrop-blur-sm whitespace-nowrap">3 Week Program</span>
+                </div>
                 <h3 className="text-xl font-bold mt-4">{package_.title}</h3>
                 <div className="mt-4 space-y-2">
                   {package_.certs.map((cert) => (
@@ -284,7 +292,9 @@ export default function CoursesPage() {
 
       {/* Expert Packages */}
       <section>
-        <h2 className="text-2xl font-bold mb-8">Expert Microsoft Certification Packages</h2>
+        <div className="inline-block backdrop-blur-md bg-gradient-to-r from-yellow-200/30 via-amber-100/30 to-yellow-200/30 border border-white/20 rounded-lg px-6 py-3 shadow-xl mb-8">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-yellow-500 inline-block text-transparent bg-clip-text">Expert Microsoft Certification Packages</h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {([
             { title: "Azure + AI + Data + Power Platform", certs: ["Cloud", "AI", "DP", "PL"] },
@@ -293,7 +303,10 @@ export default function CoursesPage() {
             <div key={index} className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl shadow-xl p-8 text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 to-blue-600/90 -z-10"></div>
               <div className="flex-grow relative z-10">
-                <Badge className="bg-white text-purple-600">Expert Package</Badge>
+                <div className="flex items-center space-x-2">
+                  <Badge className="bg-white text-purple-600">Expert Package</Badge>
+                  <span className="px-3 py-1 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-sm">4 Week Program</span>
+                </div>
                 <h3 className="text-2xl font-bold mt-4">{package_.title}</h3>
                 <div className="mt-4 space-y-2">
                   {package_.certs.map((cert) => (
