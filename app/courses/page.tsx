@@ -43,14 +43,14 @@ const commonFeatures: Feature[] = [
     icon: "FileText"
   },
   {
-    title: "CMU Admissions Guide",
-    description: "Direct guidance from CMU admissions committee members on application strategy",
-    icon: "ClipboardCheck"
-  },
-  {
     title: "CMU Degree Program Insights",
     description: "In-depth exploration of CMU's degree programs with detailed insights from Program Directors",
     icon: "GraduationCap"
+  },
+  {
+    title: "CMU Admissions Guide",
+    description: "Direct guidance from CMU admissions committee members on application strategy",
+    icon: "ClipboardCheck"
   },
   {
     title: "Silicon Valley Networking Events",
@@ -66,23 +66,23 @@ const commonFeatures: Feature[] = [
 
 const expertFeatures: Feature[] = [
   {
-    title: "Pro References",
-    description: "Personalized letters of recommendation from industry experts",
+    title: "LORs from Microsoft Employees",
+    description: "Receive personalized letters of recommendation for university admissions from Microsoft senior engineers and industry leaders, highlighting your potential for graduate studies",
     icon: "FileText"
   },
   {
-    title: "Microsoft Mentorship",
-    description: "Three 30-minute 1:1 mentorship sessions with a Microsoft Employee of choice",
+    title: "1:1 Microsoft Executive Mentoring",
+    description: "Exclusive access to three personalized 30-minute mentoring sessions with Microsoft employees from our mentorship network, focusing on career guidance, technical expertise, and professional development",
     icon: "Users2"
   },
   {
-    title: "Direct Referral",
-    description: "Guaranteed referral for a position at Microsoft",
+    title: "Microsoft Career Opportunity",
+    description: "Receive a direct internal referral for a position at Microsoft through our professional network, enhancing your application for roles that match your skills and experience",
     icon: "Target"
   },
   {
-    title: "Interview Prep",
-    description: "3 comprehensive mock interview practice sessions with feedback",
+    title: "Elite Interview Preparation Program",
+    description: "Comprehensive interview preparation package including three mock interviews with Microsoft engineers, detailed feedback sessions, and personalized strategies for technical and behavioral questions",
     icon: "Building2"
   }
 ];
@@ -127,30 +127,86 @@ export default function CoursesPage() {
             </p>
             <div className="mt-6">
               <h3 className="text-xl font-semibold mb-3">Features:</h3>
-              <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                {commonFeatures.map((feature, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    {getIcon(feature.icon, "w-5 h-5")}
-                    <span>{feature.title}</span>
-                    <TooltipProvider>
-                      <Tooltip delayDuration={200}>
-                        <TooltipTrigger asChild>
-                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
-                            <Info className="w-3.5 h-3.5" />
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent 
-                          side="right" 
-                          align="start"
-                          className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
-                        >
-                          <p className="text-sm leading-relaxed">{feature.description}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  </li>
-                ))}
-              </ul>
+              <div className="grid grid-cols-3 gap-6">
+                {/* Column 1: LinkedIn and Resume */}
+                <ul className="space-y-3">
+                  {commonFeatures.slice(0, 2).map((feature, index) => (
+                    <li key={index} className="flex items-start min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </li>
+                  ))}
+                </ul>
+                {/* Column 2: CMU Degree and Admissions */}
+                <ul className="space-y-3">
+                  {commonFeatures.slice(2, 4).map((feature, index) => (
+                    <li key={index} className="flex items-start min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </li>
+                  ))}
+                </ul>
+                {/* Column 3: Silicon Valley and Faculty */}
+                <ul className="space-y-3">
+                  {commonFeatures.slice(4, 6).map((feature, index) => (
+                    <li key={index} className="flex items-start min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
+                      <TooltipProvider>
+                        <Tooltip delayDuration={200}>
+                          <TooltipTrigger asChild>
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                              <Info className="w-3.5 h-3.5" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent 
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
+                            className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
+                          >
+                            <p className="text-sm leading-relaxed">{feature.description}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="mt-6">
               <span className="text-3xl font-bold">$2,499 USD</span>
@@ -189,9 +245,9 @@ export default function CoursesPage() {
         </div>
         <div className="flex flex-wrap gap-3 justify-center">
           {commonFeatures.map((feature, index) => (
-            <div key={index} className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 group">
+            <div key={index} className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium flex items-center group">
               {getIcon(feature.icon, "w-4 h-4")}
-              <span>{feature.title}</span>
+              <span className="mx-2">{feature.title}</span>
               <TooltipProvider>
                 <Tooltip delayDuration={200}>
                   <TooltipTrigger asChild>
@@ -200,8 +256,9 @@ export default function CoursesPage() {
                     </div>
                   </TooltipTrigger>
                   <TooltipContent 
-                    side="top" 
+                    side="bottom" 
                     align="center"
+                    sideOffset={5}
                     className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
                   >
                     <p className="text-sm leading-relaxed">{feature.description}</p>
@@ -238,19 +295,20 @@ export default function CoursesPage() {
                 <h4 className="font-semibold mb-2">All Features Included:</h4>
                 <ul className="grid grid-cols-2 gap-y-6 gap-x-4">
                   {commonFeatures.slice(0, 3).map((feature, index) => (
-                    <li key={index} className="flex items-start space-x-2 text-sm min-h-[3rem]">
+                    <li key={index} className="flex items-start min-h-[3rem]">
                       {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1">{feature.title}</span>
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
                       <TooltipProvider>
                         <Tooltip delayDuration={200}>
                           <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
                               <Info className="w-3.5 h-3.5" />
                             </div>
                           </TooltipTrigger>
                           <TooltipContent 
-                            side="right" 
-                            align="start"
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
                             className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
@@ -260,19 +318,20 @@ export default function CoursesPage() {
                     </li>
                   ))}
                   {commonFeatures.slice(3).map((feature, index) => (
-                    <li key={index + 3} className="flex items-start space-x-2 text-sm min-h-[3rem]">
+                    <li key={index + 3} className="flex items-start min-h-[3rem]">
                       {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
-                      <span className="flex-1">{feature.title}</span>
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
                       <TooltipProvider>
                         <Tooltip delayDuration={200}>
                           <TooltipTrigger asChild>
-                            <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
                               <Info className="w-3.5 h-3.5" />
                             </div>
                           </TooltipTrigger>
                           <TooltipContent 
-                            side="right" 
-                            align="start"
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
                             className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
@@ -286,21 +345,22 @@ export default function CoursesPage() {
 
               <div className="mt-6 pt-6 border-t border-white/20">
                 <h4 className="font-semibold mb-2">Expert Exclusive Benefits:</h4>
-                <ul className="grid grid-cols-2 gap-2">
+                <ul className="grid grid-cols-2 gap-y-6 gap-x-4">
                   {expertFeatures.map((feature, index) => (
-                    <li key={index} className="flex items-center space-x-2 text-sm">
-                      {getIcon(feature.icon, "w-4 h-4")}
-                      <span>{feature.title}</span>
+                    <li key={index} className="flex items-start min-h-[3rem]">
+                      {getIcon(feature.icon, "w-4 h-4 mt-0.5")}
+                      <span className="flex-1 ml-2 mr-0.5">{feature.title}</span>
                       <TooltipProvider>
                         <Tooltip delayDuration={200}>
                           <TooltipTrigger asChild>
-                            <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-help">
                               <Info className="w-3.5 h-3.5" />
                             </div>
                           </TooltipTrigger>
                           <TooltipContent 
-                            side="right" 
-                            align="start"
+                            side="bottom" 
+                            align="center"
+                            sideOffset={5}
                             className="bg-white text-gray-900 border-none shadow-lg p-3 max-w-[280px] rounded-lg"
                           >
                             <p className="text-sm leading-relaxed">{feature.description}</p>
